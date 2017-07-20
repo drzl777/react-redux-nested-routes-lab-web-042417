@@ -1,16 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from 'react'
+import { connect } from 'react-redux'
 
-const PetsShow = ({ pet }) => 
-  <div className="col-md-8">
+const PetsShow = ({ pet }) =>
+  <div className='col-md-8'>
     <h2>{pet.name}</h2>
     <p>{pet.description}</p>
-  </div>;
+  </div>
 
 const mapStateToProps = (state, ownProps) => {
+  const petId = ownProps.match.params.petId
   return {
-    pet: {}
-  };
-};
+    pet: {...state.pets[petId - 1]}
+  }
+}
 
-export default connect(mapStateToProps)(PetsShow);
+export default connect(mapStateToProps)(PetsShow)

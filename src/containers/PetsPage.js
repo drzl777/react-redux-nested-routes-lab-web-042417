@@ -1,20 +1,23 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
-import { fetchPets } from '../actions';
-import PetsNew from './PetsNew';
-import PetsShow from './PetsShow';
-import PetsList from '../components/PetsList';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Route, Switch } from 'react-router-dom'
+import { fetchPets } from '../actions'
+import PetsNew from './PetsNew'
+import PetsShow from './PetsShow'
+import PetsList from '../components/PetsList'
 
 class PetsPage extends Component {
 
-  componentDidMount() {
-    this.props.fetchPets();
+  componentDidMount () {
+    this.props.fetchPets()
   }
 
-  render() {
+  render () {
     return (
-      <div>Pets Page</div>
+      <div>
+        <PetsList pets={this.props.pets} />
+        <Route path={this.props.match.url + '/:petId'} component={PetsShow} />
+      </div>
     )
   }
 };
@@ -22,7 +25,7 @@ class PetsPage extends Component {
 const mapStateToProps = state => {
   return {
     pets: state.pets
-  };
+  }
 }
 
-export default connect(mapStateToProps, { fetchPets })(PetsPage);
+export default connect(mapStateToProps, { fetchPets })(PetsPage)
